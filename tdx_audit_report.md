@@ -77,3 +77,25 @@ Recommend addressing all Medium findings before mainnet merge.
 
 ---
 Report by: demarco2016 | Independent Security Review
+
+## Additional Findings (Post-Code Review)
+
+### [L-05] Missing zkCoprocessor in AttestationSubmitted event
+File: TDXVerifier.sol | Severity: Low
+Off-chain indexers cannot distinguish Risc0 vs Succinct proofs from event logs.
+Recommendation: Add ZkCoProcessorType to AttestationSubmitted event.
+
+### [L-06] Single ZK backend at constructor time
+File: TDXVerifier.sol | Severity: Low
+Only one ZK coprocessor configured at deploy. Second backend requires post-deploy owner call.
+Recommendation: Accept array of ZkCoProcessorConfig at constructor.
+
+### [I-02] No secp256k1 curve point validation
+File: TDXVerifier.sol | Severity: Informational
+Only length + prefix checked. X,Y coordinates not validated to be on curve.
+Recommendation: Add curve point validation or document assumption.
+
+## Updated Summary
+- Medium: 5
+- Low: 6
+- Informational: 2
